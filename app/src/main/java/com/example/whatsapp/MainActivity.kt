@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.example.whatsapp.presentation.homescreen.HomeScreen
 import com.example.whatsapp.presentation.userregistrationscreen.UserRegistrationScreen
 import com.example.whatsapp.ui.theme.WhatsAppTheme
 
@@ -14,7 +15,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             WhatsAppTheme {
 
-                UserRegistrationScreen()
+                HomeScreen()
 
             }
         }

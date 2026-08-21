@@ -65,6 +65,29 @@ fun UpdateScreen() {
 
     )
 
+    val channelSampleItems = listOf(
+        ChannelItems(
+            image = R.drawable.neat_roots,
+            channelName = "Neat Roots",
+            description = "Latest news in tech"
+        ),
+        ChannelItems(
+            image = R.drawable.bhuvan_bam,
+            channelName = "Bhuvan Bam",
+            description = "Comedy videos"
+        ),
+        ChannelItems(
+            image = R.drawable.mrbeast,
+            channelName = "Mr Beast",
+            description = "Vlogs"
+        ),
+        ChannelItems(
+            image = R.drawable.salman_khan,
+            channelName = "Being Human",
+            description = "Salman Vlogs"
+        )
+    )
+
     Scaffold(
         floatingActionButton = {
 
@@ -135,6 +158,10 @@ fun UpdateScreen() {
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
             )
+
+            channelSampleItems.forEach {
+                ChannelItems(channelitem = it)
+            }
 
 
         }

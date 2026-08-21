@@ -7,14 +7,21 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -116,8 +123,11 @@ fun StatusItem(statusData: StatusData) {
 }
 
 @Composable
-@Preview(showSystemUi = true)
-fun ChannelItems() {
+fun ChannelItems(channelitem: ChannelItems) {
+
+    var isFollowing by remember {
+        mutableStateOf(false)
+    }
 
     Row(
         modifier = Modifier
@@ -126,7 +136,7 @@ fun ChannelItems() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
-            painterResource(R.drawable.neat_roots),
+            painterResource(channelitem.image),
             contentDescription = null,
             modifier = Modifier
                 .size(60.dp)
@@ -137,11 +147,41 @@ fun ChannelItems() {
         Spacer(Modifier.width(12.dp))
 
         Column() {
-            Text("Neat Roots", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-            Text("Latest news in tech", fontSize = 14.sp, color = Color.Gray)
+            Text(channelitem.channelName, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            Text(channelitem.description, fontSize = 14.sp, color = Color.Gray)
+        }
+
+        Spacer(Modifier.weight(1f))
+
+
+        Button(
+            onClick = { isFollowing = !isFollowing },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = if (isFollowing) {
+                    Color.Gray
+                } else GreenLight
+            ),
+            modifier = Modifier
+                .padding(8.dp)
+                .height(36.dp)
+        ) {
+            Text(
+                text = if (isFollowing) {
+                    "Following"
+                } else {
+                    "Follow"
+                },
+                color = if (isFollowing) {
+                    Color.Black
+                } else {
+                    Color.White
+                }, fontWeight = FontWeight.Bold
+            )
         }
 
 
     }
 
 }
+
+data class ChannelItems(val image: Int, val channelName: String, val description: String)
